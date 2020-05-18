@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true svarpe/docker-react-sv npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "Docker-SV-React"
+  env: "DockerSvReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-756575261520"
+  bucket_path: "Docker-SV-React"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
